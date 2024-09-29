@@ -14,7 +14,7 @@ def main():
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
-        stdin, stdout, stderr = client.exec_command("nohup python3.12 sample-dvc/app.py > /dev/null 2>&1 &")
+        stdin, stdout, stderr = client.exec_command("cd sample-dvc | nohup python3.12 sample-dvc/app.py > /dev/null 2>&1 &")
         if stderr:
             print("Error running deployment script: " + stderr.read().decode())
             return
