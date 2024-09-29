@@ -5,7 +5,7 @@ import paramiko
 def main():
     ec2_host = os.getenv('EC2_IP')
     ec2_user = os.getenv('EC2_USER')
-    ec2_key = os.getenv('EC2_KEY')
+    ec2_key = os.getenv('EC2_SECRET_KEY')
 
     private_key_path = "/tmp/ec2_key"
     with open(private_key_path, 'w') as f:

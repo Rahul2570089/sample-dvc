@@ -39,7 +39,7 @@ jobs:
       env:
         EC2_IP: ${{ secrets.EC2_IP }}
         EC2_USER: ${{ secrets.EC2_USER }}
-        EC2_KEY: ${{ secrets.EC2_KEY }}
+        EC2_SECRET_KEY: ${{ secrets.EC2_SECRET_KEY }}
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
         python deploy.py
