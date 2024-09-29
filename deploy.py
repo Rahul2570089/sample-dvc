@@ -16,13 +16,13 @@ def main():
         client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
         stdin, stdout, stderr = client.exec_command("git clone https://github.com/Rahul2570089/sample-dvc.git")
         if stderr:
-            print(stderr.read().decode())
-            raise
-        print(stdout.read().decode())
+            print("Error cloning repo: " + stderr.read().decode())
+            return
+        print("Cloned repo")
         stdin, stdout, stderr = client.exec_command("python3.12 app.py")
         if stderr:
-            print(stderr.read().decode())
-            raise
+            print("Error running deployment script: " + stderr.read().decode())
+            return
         print(stdout.read().decode())
         client.close()
     except Exception as e:
