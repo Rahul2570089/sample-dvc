@@ -12,6 +12,7 @@ def main():
         os.chmod(private_key_path, 0o600)
         key = paramiko.RSAKey.from_private_key_file(private_key_path)
         client = paramiko.SSHClient()
+        client.get_host_keys().add(ec2_host, 'ssh-rsa', key)
         client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         stdin, stdout, stderr = client.exec_command("python app.py")
