@@ -15,7 +15,7 @@ def main():
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
+        client.connect(hostname=ec2_host, username=ec2_user, key_filename=private_key_path)
         stdin, stdout, stderr = client.exec_command("python app.py")
         print(stdout.read())
     except Exception as e:
