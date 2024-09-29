@@ -12,4 +12,5 @@ flake8
 flask
 gunicorn
 PyYAML
+paramiko
 importlib-metadata==4.13.0
