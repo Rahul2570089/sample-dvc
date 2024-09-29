@@ -37,7 +37,7 @@ jobs:
         pytest -v
     - name: Add SSH key
       run: |
-        echo "${{ secrets.EC2_KEY }}" > /tmp/ec2_key
+        echo "${{ secrets.EC2_SECRET_KEY }}" > /tmp/ec2_key
         chmod 600 /tmp/ec2_key
     - name: Deploy to AWS EC2
       env:
