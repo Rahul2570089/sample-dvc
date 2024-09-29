@@ -14,11 +14,6 @@ def main():
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
-        stdin, stdout, stderr = client.exec_command("git clone https://github.com/Rahul2570089/sample-dvc.git")
-        if stderr:
-            print("Error cloning repo: " + stderr.read().decode())
-            return
-        print("Cloned repo")
         stdin, stdout, stderr = client.exec_command("python3.12 app.py")
         if stderr:
             print("Error running deployment script: " + stderr.read().decode())
@@ -27,7 +22,7 @@ def main():
         client.close()
     except Exception as e:
         print(e)
-    # finally:
+
 
 if __name__ == "__main__":
     main()
