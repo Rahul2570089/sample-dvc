@@ -15,7 +15,7 @@ def main():
     client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
     stdin, stdout, stderr = client.exec_command("echo -e \"#!/bin/bash\ncd sample-dvc/\nnohup python3.12 app.py > /dev/null 2>&1 &\" > deploy.sh")
     stdin, stdout, stderr = client.exec_command("sh deploy.sh")
-    if stderr:
+    if stderr.read().decode().strip():
         print("Error running deployment script: " + stderr.read().decode())
         return
     print(stdout.read().decode())
