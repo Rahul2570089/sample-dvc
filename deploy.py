@@ -14,8 +14,16 @@ def main():
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname=ec2_host, username=ec2_user, pkey=key)
-        stdin, stdout, stderr = client.exec_command("python app.py")
-        print(stdout.read())
+        stdin, stdout, stderr = client.exec_command("git clone https://github.com/Rahul2570089/sample-dvc.git")
+        if stderr:
+            print(stderr.read().decode())
+            raise
+        print(stdout.read().decode())
+        stdin, stdout, stderr = client.exec_command("python3.12 app.py")
+        if stderr:
+            print(stderr.read().decode())
+            raise
+        print(stdout.read().decode())
         client.close()
     except Exception as e:
         print(e)
